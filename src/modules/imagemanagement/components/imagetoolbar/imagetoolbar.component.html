@@ -1,0 +1,19 @@
+<div class="imagetoolbar">
+    <button type="button" class="btn" [disabled]="!activateUploadFile" (click)="onUploadFileClick()">
+      <i class="fa fa-upload"></i>
+      <span class="button-text" >Upload file</span>  
+    </button>
+    <button type="button" class="btn" [disabled]="!activateUploadFolder" (click)="onUploadFolderClick()">
+        <i class="fa fa-folder"></i>
+        <span class="button-text">Upload to new folder</span>
+    </button>
+    <button type="button" class="btn" [disabled]="!activateRename" (click)="onRenameClick()">
+        <i class="fa fa-pencil"></i>
+        <span class="button-text">Rename</span>
+    </button>  
+    <button type="button" class="btn" [disabled]="!activateDelete" (click)="onDeleteClick()">
+        <i class="fa fa-trash"></i>
+        <span class="button-text">Delete</span>
+    </button> 
+  </div>
+  

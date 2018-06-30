@@ -1,0 +1,19 @@
+<div>
+    <div name="tree">
+        <div class="tree-header">
+            <h2>{{_viewHeader}}:</h2>
+        </div>
+        <div class="tree-wrapper">
+            <tree-root [nodes]="_storageElements" [options]="_treeOptions" (activate)="onTreeElementSelect($event)" (deactivate)="onTreeElementDeselect($event)">
+            </tree-root>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-8 decision-buttons">
+            <button id="submit" name="submit" class="btn btn-primary" (click)="onPathSelect($event)" [disabled]="!isPathSelected()">Choose</button>
+            <button id="cancel" name="cancel" class="btn btn-default" (click)="onCancelOperation($event)">Cancel</button>
+        </div>
+    </div>
+</div>

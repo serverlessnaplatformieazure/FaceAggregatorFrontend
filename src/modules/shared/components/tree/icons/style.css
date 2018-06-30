@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'TreeIcons';
+  src:  url('fonts/TreeIcons.eot?g9edh6');
+  src:  url('fonts/TreeIcons.eot?g9edh6#iefix') format('embedded-opentype'),
+    url('fonts/TreeIcons.ttf?g9edh6') format('truetype'),
+    url('fonts/TreeIcons.woff?g9edh6') format('woff'),
+    url('fonts/TreeIcons.svg?g9edh6#TreeIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'TreeIcons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline;
+  cursor: pointer;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tree-expand:before {
+  content: "\e900";
+}
+.icon-tree-expand:hover:before {
+  content: "\e901";
+}
+.icon-tree-expand-2:before {
+  content: "\e901";
+}
+.icon-tree-collapse:before {
+  content: "\e902";
+}
+.icon-tree-collapse:hover:before {
+  content: "\e903";
+}
+.icon-tree-collapse-2:before {
+  content: "\e903";
+}

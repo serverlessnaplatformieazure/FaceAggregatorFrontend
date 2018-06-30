@@ -1,0 +1,18 @@
+<div class='element-wrapper' *ngFor='let item of data; let idx = index'>
+    <div class='item'>
+        <div
+            [ngClass]="{'icon-tree-expand': !_showChildren[idx], 'icon-tree-collapse': _showChildren[idx], 'not-visible': !item[childField]}"
+            (click)='toggleChildren(idx)'></div>
+        <div class='element-text' (click)='onItemClick(item[valueField])'>{{item[textField]}}</div>
+    </div>
+    <div class='asset-children' [ngClass]="{'hide': !(_showChildren[idx])}">
+        <app-tree-component 
+            *ngIf='item[childField]'
+            [textField]='textField'
+            [valueField]='valueField'
+            [childField]='childField'
+            [data]='item[childField]' 
+            (onSelect)='onItemClick($event)'>
+        </app-tree-component>
+    </div>
+</div>

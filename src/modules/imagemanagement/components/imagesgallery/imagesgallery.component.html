@@ -1,0 +1,13 @@
+<div class="wrapper">    
+    <div *ngIf="galleryVisible" class="content">
+      <legend>
+        <b>
+          List of images in folder {{selectedFolderName}}
+        </b>
+      </legend>
+      <div class="items-wrapper">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+      </div>
+    </div>
+</div>
+  

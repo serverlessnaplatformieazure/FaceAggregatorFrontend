@@ -1,0 +1,13 @@
+<div class="title">
+        <span>FaceAggregator</span>
+        <img src="./../../../../assets/Azure Functions_COLOR_LARGE.svg" class="functions-logo">
+</div>
+<nav class="navigation-bar"> 
+    <ng-container *ngFor="let link of routes">
+        <div *ngIf="link.data.visible" class="navigation-link-wrapper" routerLink={{link.path}} routerLinkActive="active">
+            <div class="navigation-link">
+            {{link.data['name']}}
+            </div>
+        </div>
+    </ng-container>
+</nav>

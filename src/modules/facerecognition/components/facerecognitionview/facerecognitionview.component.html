@@ -1,0 +1,51 @@
+<form class="mainpanel" [formGroup]="_form">
+  <div class="form-group">
+    <label class="inline-block">Photos source:</label>
+    <button type="button" class="btn" (click)="openSourcePathChooser()" id="chooseSourceBtn">
+      <span class="button-text">Choose source</span>
+    </button>
+    <div class="selected-paths">
+      {{sourcePath}}
+    </div>  
+  </div>
+
+  <div class="form-group">
+    <label for="facePatternBtn">Face pattern:</label>    
+    <button type="button" class="btn" (click)="openPhotosPatternChooser()" id="facePatternBtn">
+      <span class="button-text">Choose faces</span>
+    </button>
+    <div *ngFor="let item of patternFaces; let i = index">
+      <div class="selected-paths">
+          {{item.RelativePath}}
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="chooseFolderBtn">Destination folder:</label>
+    <button type="button" class="btn" (click)="openDestinationPathChooser()" id="chooseFolderBtn">
+      <span class="button-text">Choose folder</span>
+    </button>
+    <div class="selected-paths">
+      {{destinationFolder}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="recName">Recognition name:</label>
+    <input type="text" class="form-control" id="recName" formControlName="RecognitionName">
+  </div>
+  <div class="form-group">
+    <label for="userEmail">User email:</label>
+    <input type="text" class="form-control" id="userEmail" formControlName="EmailAddress">
+  </div>
+  <div class="form-group">
+    <label for="userPhone">Phone number:</label>
+    <input type="text" class="form-control" id="userPhone" formControlName="PhoneNumber">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn" (click)="onStartRecognition()" [disabled]="!isFormValid()"  id="recoStartBtn">
+      <span class="button-text">Start recognition</span>
+    </button>
+  </div>
+</form>
