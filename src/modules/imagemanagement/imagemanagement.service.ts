@@ -12,7 +12,7 @@ export class ImageManagementService {
     constructor(private _apiService: ApiService) { }
    
     public GetAllContainerElements(): Observable<Response> {
-        return this._apiService.get('GetAllContainerElements/' + environment.userName, {});
+        return this._apiService.get('GetAllContainerElements', {});
     }
 
     public GetFolderElementPaths(folderName: string): Observable<Response> {

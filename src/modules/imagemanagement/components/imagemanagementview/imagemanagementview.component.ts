@@ -24,6 +24,7 @@ import { environment } from '../../../../environments/environment';
 export class ImageManagementViewComponent  {   
     _storageElements: Array<TreeElement>;
     _selectedTreeElement: TreeElement; 
+    _rootFolderName: string;
     _selectedFolderName: string;  
     _selectedFolderRelativePath: string;  
     _uploadModalTitle: string = "";
@@ -45,10 +46,10 @@ export class ImageManagementViewComponent  {
         this.galleryImages = new Array<NgxGalleryImage>(); 
        
         this.uploader.onBeforeUploadItem = (item) => {   
-            var apiUrl = this.urlJoiner.joinUrl(environment.apiHost, this.urlJoiner.joinUrl('UploadImage', environment.userName));
-            var destPath = "";
+            var apiUrl = this.urlJoiner.joinUrl(environment.apiHost, 'UploadImage');
+            var destPath = "";       
             if(this._selectedFolderRelativePath !== undefined && this._selectedFolderRelativePath !== ""){
-                destPath = this._selectedFolderName + "-";
+                destPath = this.replaceAll(this._selectedFolderRelativePath, "/","-") + "-";
             };
             if(this._selectedFolderRelativePath !== undefined && this.uploadFolderName !== ""){
                 destPath = destPath + this.uploadFolderName + "-";
@@ -74,19 +75,25 @@ export class ImageManagementViewComponent  {
 
     get folderSelected(): boolean {
         return this._selectedTreeElement !== undefined && 
-            (this._selectedTreeElement.Children.length !== 0 || this._selectedTreeElement.Name == environment.userName);
+            (this._selectedTreeElement.Children.length !== 0 || this._selectedTreeElement.Name == this._rootFolderName);
     }
 
     get elementOrFolderSelected(): boolean {
         return this._selectedTreeElement !== undefined && this._selectedTreeElement.AbsolutePath !== null;
     }
 
-    get selectedFolderName(): string {
-        if(this._selectedTreeElement !== undefined && this._selectedTreeElement.Children.length !== 0)
+    get selectedFolderName(): string {       
+        if(this._selectedTreeElement !== undefined && this._selectedTreeElement.Children.length !== 0 )
         {
             this._selectedFolderName = this._selectedTreeElement.Name;
-            this._selectedFolderRelativePath = this.getDirectoryRelativePath(this._selectedTreeElement.AbsolutePath);
-        }       
+            var position = this.nthIndex(this._selectedTreeElement.RelativePath, "/", 2) + 1;
+            this._selectedFolderRelativePath = this._selectedTreeElement.RelativePath.substr(position);
+        }
+        if(this._selectedTreeElement !== undefined && this._selectedTreeElement.Name == this._rootFolderName)
+        {
+            this._selectedFolderName = this._selectedTreeElement.Name;
+            this._selectedFolderRelativePath = "";
+        }
         return this._selectedFolderName; 
     }    
 
@@ -98,11 +105,12 @@ export class ImageManagementViewComponent  {
         return this._uploadModalTitle;
     }
 
-    refreshTreeState(){
+    refreshTreeState(){        
         this._service.GetAllContainerElements().map(response => response.json())
         .subscribe(
-            result => {
-                this._storageElements = [result];          
+            result => {                
+                this._storageElements = [result];   
+                this._rootFolderName = result.Name; 
             },
             error  => {
                 console.log(error);        
@@ -181,9 +189,16 @@ export class ImageManagementViewComponent  {
         }              
     }
 
-    private getDirectoryRelativePath(absolutePath: string){
-        var result = absolutePath !== null ?
-            absolutePath.substring(absolutePath.lastIndexOf(environment.userName) + environment.userName.length + 1) : "";
-        return result.replace(/\//g, '-');;
+    private replaceAll(str, find, replace) {
+        return str.replace(new RegExp(find, 'g'), replace);
+    }    
+
+    private nthIndex(str, pat, n){
+        var L= str.length, i= -1;
+        while(n-- && i++<L){
+            i= str.indexOf(pat, i);
+            if (i < 0) break;
+        }
+        return i;
     }
 }

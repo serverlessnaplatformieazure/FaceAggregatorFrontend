@@ -16,11 +16,11 @@ export class FaceRecognitionService {
     }
 
     public GetAllContainerElements(): Observable<Response> {
-        return this._apiService.get('GetAllContainerElements/' + environment.userName, {});
+        return this._apiService.get('GetAllContainerElements', {});
     }
 
     public GetAllContainerDirectories(): Observable<Response> {
-        return this._apiService.get('GetAllContainerDirectories/' + environment.userName, {});
+        return this._apiService.get('GetAllContainerDirectories', {});
     }
    
 }
